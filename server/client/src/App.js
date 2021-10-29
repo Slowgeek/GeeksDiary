@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, useHistory, Switch } from "react-router-dom";
+import "./App.css";
+import Learning from "./Components/Learning";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className='text-red-400'>dfdf</h1>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        {" "}
+        <Route exact path="/" component={Learning} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
