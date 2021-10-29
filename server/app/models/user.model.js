@@ -11,10 +11,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: {
-    type: Number,
-    default: 11111,
+  verified: {
+    type: Boolean,
+    default: false,
   },
+  note_created: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Notes",
+    },
+  ],
+ 
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

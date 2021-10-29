@@ -17,10 +17,10 @@ const notesSchema = new mongoose.Schema(
     notes: {
       type: String,
       trim: false,
-      required: true,
     },
-    codestring: {
+    quick_rev: {
       type: String,
+      required: true,
     },
     tags: {
       type: [String],
