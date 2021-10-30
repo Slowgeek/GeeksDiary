@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Navbar from "./Navbar";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../App";
@@ -65,6 +66,7 @@ const Learning = () => {
 
   return (
     <div className="bg-neutral-200 w-full ">
+      <Navbar />
 
       <section className="mt-4 mx-4 max-w-4xl p-6 md:mx-auto  bg-secondary rounded-md shadow-md dark:bg-gray-800">
         <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">

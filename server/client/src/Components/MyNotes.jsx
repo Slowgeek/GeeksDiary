@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Navbar from "./Navbar";
 const axios = require("axios");
 const MyNotes = () => {
   const [notes, setNotes] = useState(null);
@@ -29,6 +30,7 @@ const MyNotes = () => {
 
   return (
     <div>
+      <Navbar />
       {notes ? (
         notes.length === 0 ? (
           <div>No class Created</div>

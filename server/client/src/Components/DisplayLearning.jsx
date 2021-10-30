@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import Navbar from "./Navbar";
 const axios = require("axios");
 const DisplayLearning = () => {
   const { noteId } = useParams();
@@ -30,12 +31,35 @@ const DisplayLearning = () => {
       console.log(err.response);
     }
   };
-
+  const Revised = async () => {
+    try {
+      const response = await axios.patch(
+        "/revised",
+        {
+          noteId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+              .accessToken,
+          },
+        }
+      );
+      // history.push(`/displaylearning/${noteId}`);
+      console.log(response);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+    }
+  };
   useEffect(() => {
     FetchNote();
   }, []);
   return (
     <div className="bg-neutral-200 w-full ">
+      <Navbar />
       {notes
         ? notes.map((note) => {
             return (
@@ -45,12 +69,12 @@ const DisplayLearning = () => {
                     Revision
                   </div>
 
-                  {/* <Link
+                  <Link
                     to={`/editlearning/${noteId}`}
                     className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                   >
                     Edit 🕐
-                  </Link> */}
+                  </Link>
                 </div>
 
                 {/* <div class="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -179,7 +203,7 @@ const DisplayLearning = () => {
                     </div>
                   </div>{" "}
                   <div className="flex justify-end mt-6">
-                    {/* <button
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         Revised();
@@ -187,7 +211,7 @@ const DisplayLearning = () => {
                       className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                     >
                       Revised 📝
-                    </button> */}
+                    </button>
                   </div>
                 </form>
               </section>

@@ -15,15 +15,7 @@ module.exports = function (app) {
     );
     next();
   });
-  // app.post("/signup", async (req, res) => {
-  //   try {
-  //     const notes = await Notes.find({ noted_by: "6127a87d3d83843224ade7ff" });
-  //     console.log(notes);
-  //     res.status(200).send(notes);
-  //   } catch (err) {
-  //     res.status(500).send({ err: err });
-  //   }
-  // });
+
   app.post(
     "/signup",
     [verifySignUp.checkDuplicateUsernameOrEmail],
