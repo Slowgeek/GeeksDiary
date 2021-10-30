@@ -27,7 +27,7 @@ const Login = () => {
       });
       console.log(response);
       console.log(response.data);
-      localStorage.setItem("loggedUser", JSON.stringify(response.data));
+      localStorage.setItem("verified", JSON.stringify(response.data));
       dispatch({ type: "USER", payload: response.data });
       history.push("/");
       // Toast(response.data.message, 1);

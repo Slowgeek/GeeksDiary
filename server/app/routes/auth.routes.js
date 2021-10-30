@@ -16,29 +16,51 @@ module.exports = function (app) {
     next();
   });
 
-  app.post(
-    "/signup",
-    [verifySignUp.checkDuplicateUsernameOrEmail],
-    async (req, res) => {
-      try {
-        const { username, email, password } = req.body;
-        if (!email || !password || !username) {
-          return res.status(400).send({ error: "please add all the fields" });
-        }
-
-        const user = new User({
-          username: req.body.username,
-          email: req.body.email,
-          password: await bcrypt.hash(req.body.password, 10),
-        });
-        await user.save();
-
-        res.status(200).send({ message: "User was registered successfully!" });
-      } catch (err) {
-        res.status(500).send({ err: err });
+  app.post("/sawo", async (req, res) => {
+    try {
+      const { payload } = req.body;
+      console.log(payload);
+      const user = await User.findOne({
+        email: req.body.payload.identifier,
+      });
+      if (!user) {
+        res.status(200).json({ newUser: true });
+        return;
       }
+      var token = jwt.sign({ id: user.id + payload.verification_token }, JWT, {
+        expiresIn: 86400, // 24 hours
+      });
+      res.status(200).send({
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        accessToken: token,
+        newUser: false,
+      });
+      console.log(user);
+      res.status(200).send({ message: "payload Recieved" });
+    } catch (err) {
+      res.status(500).send({ err: err });
     }
-  );
+  });
+  app.post("/signup", async (req, res) => {
+    try {
+      const { username, email } = req.body;
+      // if (!email || !username) {
+      //   return res.status(400).send({ error: "please add all the fields" });
+      // }
+      console.log(email);
+      const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+      });
+      await user.save();
+
+      res.status(200).send({ message: "User was registered successfully!" });
+    } catch (err) {
+      res.status(500).send({ err: err });
+    }
+  });
   app.post("/signin", async (req, res) => {
     try {
       const { username, password } = req.body;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import Toast from "./Toast/Toast";
 const axios = require("axios");
 const DisplayLearning = () => {
   const { noteId } = useParams();
@@ -13,7 +14,7 @@ const DisplayLearning = () => {
         url: "/displaynotes",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+          "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
             .accessToken,
         },
         params: {
@@ -41,14 +42,14 @@ const DisplayLearning = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+            "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
               .accessToken,
           },
         }
       );
       // history.push(`/displaylearning/${noteId}`);
-      console.log(response);
-      console.log(response.data);
+      Toast("Notes Revised", 1);
+      history.goBack();
     } catch (err) {
       console.log(err);
       console.log(err.response);
@@ -64,14 +65,14 @@ const DisplayLearning = () => {
         ? notes.map((note) => {
             return (
               <section className="mt-4 mx-4 max-w-4xl p-6 md:mx-auto  bg-secondary rounded-md shadow-md dark:bg-gray-800">
-                <div className="flex justify-between ">
+                <div className="flex w-full justify-between  mt-6 ">
                   <div className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
                     Revision
                   </div>
 
                   <Link
                     to={`/editlearning/${noteId}`}
-                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                   >
                     Edit 🕐
                   </Link>
@@ -84,7 +85,7 @@ const DisplayLearning = () => {
                 </p>
               </div>
             </div> */}
-                <form>
+                <form className="w-full">
                   <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                     <div>
                       <label
@@ -208,7 +209,7 @@ const DisplayLearning = () => {
                         e.preventDefault();
                         Revised();
                       }}
-                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                     >
                       Revised 📝
                     </button>

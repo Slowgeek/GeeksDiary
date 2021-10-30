@@ -2,7 +2,6 @@ const db = require("../models");
 const authJwt = require("../middlewares/authJwt");
 const Notes = db.notes;
 const User = db.user;
-// const cron = require("node-cron");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -16,10 +15,6 @@ module.exports = function (app) {
 
   app.get("/home", [authJwt.verifyToken], async (req, res) => {
     try {
-      //   var x = 0;
-      //   var task = cron.schedule(" */5 * * * * *", async function () {
-      //     console.log("running a task every 5 sec 3 times" + new Date());
-      //     if (x < 4) {
       const notes = await User.findOne({ _id: req.userId })
         .select("-password")
         .populate({
@@ -32,54 +27,31 @@ module.exports = function (app) {
             },
           },
         });
-      //       // .exec({ $set: { noteToReviseToday: notes.note_created } });
       console.log("object");
       console.log(notes);
       notes.noteToReviseToday = notes.note_created;
       await notes.save();
       console.log(notes.note_created);
-      //       x++;
       res.status(200).send(notes);
-      //     } else {
-      //       task.stop();
-      //       console.log("stopped");
-      //       task.stop();
-      //     }
-      //   });
-      //   if (x < 4) {
-      //     task.start();
-      //     function myFunction() {
-      //       setTimeout(function () {
-      //         console.log("Stopped");
-      //         task.stop();
-      //       }, 20000);
-      //     }
-      //     myFunction();
-      //   }
     } catch (err) {
       res.status(500).send({ err: err });
     }
   });
   app.get("/today", [authJwt.verifyToken], async (req, res) => {
     try {
-      // const notes = await User.findOne({ _id: req.userId }).populate(
-      //   "note_created",
-      //   "_id revision_date"
-      // );
-      const notes = await User.findOne({ _id: req.userId })
-        .select("-password")
-        .populate({
-          path: "note_created",
-          // select: "_id",
-          match: {
-            revision_date: {
-              $lte: new Date(new Date().toDateString()).getTime() + 86000000,
-              $gte: new Date(new Date().toDateString()),
-            },
+      console.log("here")
+      const notes = await User.findOne({ _id: req.userId }).populate({
+        path: "note_created",
+        // select: "_id",
+        match: {
+          revision_date: {
+            $lte: new Date(new Date().toDateString()).getTime() + 86000000,
+            $gte: new Date(new Date().toDateString()),
           },
-        });
+        },
+      });
       // .exec({ $set: { noteToReviseToday: notes.note_created } });
-      
+
       notes.noteToReviseToday = notes.note_created;
       await notes.save();
       const due = await Notes.find({

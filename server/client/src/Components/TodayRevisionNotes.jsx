@@ -11,7 +11,7 @@ const TodayRevisionNotes = () => {
       const response = await axios.get("/today", {
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+          "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
             .accessToken,
         },
       });
@@ -55,6 +55,11 @@ const TodayRevisionNotes = () => {
                           weekday: "long",
                         }).format(new Date(note.revision_date))}
                       </span>
+                      {note.revised ? (
+                        <h1 className="bg-primary px-2 rounded">Revised</h1>
+                      ) : (
+                        <h1 className="bg-red-600 px-2 rounded">Due for Revision</h1>
+                      )}
                       <h1 className=" px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">
                         {note.level}
                       </h1>
@@ -133,6 +138,11 @@ const TodayRevisionNotes = () => {
                           weekday: "long",
                         }).format(new Date(d.revision_date))}
                       </span>
+                      {d.revised ? (
+                        <h1 className="bg-primary px-2 rounded">Revised</h1>
+                      ) : (
+                        <h1 className="bg-red-600 px-2 rounded">Due for Revision</h1>
+                      )}
                       <h1 className=" px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">
                         {d.level}
                       </h1>

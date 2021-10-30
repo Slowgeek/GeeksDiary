@@ -7,10 +7,6 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   verified: {
     type: Boolean,
     default: false,
@@ -27,7 +23,7 @@ const userSchema = new mongoose.Schema({
       ref: "Notes",
     },
   ],
- dueforRevision: [
+  dueforRevision: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Notes",

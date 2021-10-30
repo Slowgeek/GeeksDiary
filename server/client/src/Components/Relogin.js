@@ -7,7 +7,7 @@ const Relogin = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    const user = JSON.parse(localStorage.getItem("verifiedUser"));
     if (user) {
       dispatch({ type: "USER", payload: user });
       if (

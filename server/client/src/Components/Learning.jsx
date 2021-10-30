@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Toast from "../Components/Toast/Toast";
 import Navbar from "./Navbar";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +9,7 @@ import { UserContext } from "../App";
 const axios = require("axios");
 const Learning = () => {
   const { state } = useContext(UserContext);
-
+  const history = useHistory();
   const options = [
     {
       label: "Hard",
@@ -30,7 +31,7 @@ const Learning = () => {
   const [quickrev, setQuickrev] = useState("");
   const [tags, setTags] = useState([""]);
   const [revisionDate, setRevisionDate] = useState();
-  console.log(JSON.parse(localStorage.getItem("loggedUser")).accessToken);
+  console.log(problem);
   const Schedule = async () => {
     try {
       const response = await axios.post(
@@ -48,15 +49,15 @@ const Learning = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+            "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
               .accessToken,
           },
         }
       );
-      console.log("after request");
-
       console.log(response);
       console.log(response.data);
+      history.push("/");
+      Toast("Notes Sheduled Succesfully", 1);
     } catch (err) {
       console.log(err);
       console.log(err.response);
@@ -73,7 +74,7 @@ const Learning = () => {
           Today's Learning
         </h2>
 
-        <form>
+        <form className="w-full">
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label
@@ -196,7 +197,7 @@ const Learning = () => {
                 e.preventDefault();
                 Schedule();
               }}
-              className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
             >
               Shedule 🕐
             </button>

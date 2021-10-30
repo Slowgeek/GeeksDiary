@@ -3,13 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 const axios = require("axios");
 const Home = () => {
+  console.log(JSON.parse(localStorage.getItem("verifiedUser")));
   const { state } = useContext(UserContext);
   const UpdateTodayList = async () => {
     try {
       const response = await axios.get("/home", {
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+          "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
             .accessToken,
         },
       });

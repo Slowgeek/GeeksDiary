@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import Toast from "../Components/Toast/Toast";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import es from "date-fns/locale/es";
@@ -33,7 +34,7 @@ const EditLearning = () => {
         url: "/displaynotes",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+          "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
             .accessToken,
         },
         params: {
@@ -62,12 +63,13 @@ const EditLearning = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+            "x-access-token": JSON.parse(localStorage.getItem("verifiedUser"))
               .accessToken,
           },
         }
       );
       history.push(`/displaylearning/${noteId}`);
+      Toast("Notes Updated", 1);
       console.log(response);
       console.log(response.data);
     } catch (err) {
@@ -87,7 +89,7 @@ const EditLearning = () => {
             Learning
           </h2>
 
-          <form>
+          <form className="w-full">
             <div className="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
               <div>
                 <label
@@ -249,7 +251,7 @@ const EditLearning = () => {
                   e.preventDefault();
                   UpdateNote();
                 }}
-                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
               >
                 Update Note 🕐
               </button>
