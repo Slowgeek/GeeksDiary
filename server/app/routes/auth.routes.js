@@ -46,9 +46,7 @@ module.exports = function (app) {
   app.post("/signup", async (req, res) => {
     try {
       const { username, email } = req.body;
-      // if (!email || !username) {
-      //   return res.status(400).send({ error: "please add all the fields" });
-      // }
+
       console.log(email);
       const user = new User({
         username: req.body.username,
@@ -57,42 +55,6 @@ module.exports = function (app) {
       await user.save();
 
       res.status(200).send({ message: "User was registered successfully!" });
-    } catch (err) {
-      res.status(500).send({ err: err });
-    }
-  });
-  app.post("/signin", async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      if (!password || !username) {
-        return res.status(400).send({ error: "please add all the fields" });
-      }
-      const user = await User.findOne({ username: req.body.username });
-      if (!user) {
-        return res.status(404).send({ message: "User Not Found" });
-      }
-      const passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!",
-        });
-      }
-      console.log(user);
-
-      var token = jwt.sign({ id: user.id }, JWT, {
-        expiresIn: 86400, // 24 hours
-      });
-      console.log(token);
-      res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        accessToken: token,
-      });
     } catch (err) {
       res.status(500).send({ err: err });
     }

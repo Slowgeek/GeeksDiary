@@ -37,16 +37,16 @@ const MyNotes = () => {
         ) : (
           notes.map((note) => {
             return (
-              <Link to={`/displaylearning/${note._id}`}>
+              <Link to={`/displaylearning/${note._id}`} key={note._id}>
                 <div className="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
                   <div className="flex items-center justify-between">
                     <span className="rounded text-sm font-light text-gray-600 dark:text-gray-400">
-                    {Intl.DateTimeFormat("en-US", {
-                          day: "numeric",
-                          year: "numeric",
-                          month: "long",
-                          weekday: "long",
-                        }).format(new Date(note.revision_date))}
+                      {Intl.DateTimeFormat("en-US", {
+                        day: "numeric",
+                        year: "numeric",
+                        month: "long",
+                        weekday: "long",
+                      }).format(new Date(note.revision_date))}
                     </span>
                     <h1 className=" px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">
                       {note.level}

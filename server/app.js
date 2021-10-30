@@ -25,6 +25,11 @@ mongoose.connection.on("error", () => {
 app.use(express.json()); //repalcement of bodyparser
 require("./app/routes/notes.routes")(app);
 require("./app/routes/auth.routes")(app);
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(process.env.PORT, () => {
   console.log("Server is runnng at port", process.env.PORT);

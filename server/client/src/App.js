@@ -7,9 +7,6 @@ import DisplayLearning from "./Components/DisplayLearning";
 import MyNotes from "./Components/MyNotes";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./Components/Protected/ProtectedRoutes";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
-// import Relogin from "./Components/Relogin";
 import { reducer, initialState } from "./reducers/useReducer";
 import TodayRevisionNotes from "./Components/TodayRevisionNotes";
 import SawoLogin from "./Components/SawoLogin";
@@ -27,12 +24,7 @@ function App() {
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/sawo" component={SawoLogin} />
-          {/* <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} /> */}
           <ProtectedRoute exact path="/learning" component={Learning} />
-
-          {/* <Route exact path="/learning" component={Learning} /> */}
-          {/* <Route exact path="/editlearning" component={EditLearning} /> */}
           <ProtectedRoute
             exact
             path="/editlearning/:noteId"
