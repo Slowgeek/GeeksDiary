@@ -58,7 +58,7 @@ const DisplayLearning = () => {
     FetchNote();
   }, []);
   return (
-    <div className="bg-neutral-200 w-full ">
+    <div className="bg-neutral-200 w-full dark:bg-gray-600">
       <Navbar />
       {notes
         ? notes.map((note) => {

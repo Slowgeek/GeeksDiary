@@ -42,7 +42,7 @@ export default function Navbar() {
           </button>
         </div>{" "}
         <div className="mx-auto text-primary text-2xl ">Geek Diary 📗 </div>
-        <div className="text-left">🌓</div>
+        <div className="text-left"></div>
       </div>
       <nav
         className={` ${

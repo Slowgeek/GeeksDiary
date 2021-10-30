@@ -27,7 +27,7 @@ const Home = () => {
   }, []);
   return (
     <div className="bg-neutral-200 h-screen md:h-full">
-      <div className=" md:h-screen">
+      <div className=" md:h-screen dark:bg-gray-800">
         <div className="mx-auto mb-10 text-center transform text-2xl h-12 w-1/5 transition duration-500 text-primary font-mono py-10 hover:scale-125">
           Geek Diary 📗
         </div>

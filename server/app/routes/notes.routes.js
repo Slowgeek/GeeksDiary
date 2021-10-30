@@ -2,7 +2,7 @@ const db = require("../models");
 const authJwt = require("../middlewares/authJwt");
 const Notes = db.notes;
 const User = db.user;
-const cron = require("node-cron");
+// const cron = require("node-cron");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
