@@ -4,26 +4,26 @@ import { UserContext } from "../App";
 const axios = require("axios");
 const Home = () => {
   const { state } = useContext(UserContext);
-  // const UpdateTodayList = async () => {
-  //   try {
-  //     const response = await axios.get("/home", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
-  //           .accessToken,
-  //       },
-  //     });
-  //     console.log("after request");
+  const UpdateTodayList = async () => {
+    try {
+      const response = await axios.get("/home", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+            .accessToken,
+        },
+      });
+      console.log("after request");
 
-  //     console.log(response);
-  //     console.log(response.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //     console.log(err.response);
-  //   }
-  // };
+      console.log(response);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+    }
+  };
   useEffect(() => {
-    // UpdateTodayList();
+    UpdateTodayList();
   }, []);
   return (
     <div className="bg-neutral-200 h-screen md:h-full">

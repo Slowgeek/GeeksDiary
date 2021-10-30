@@ -21,7 +21,18 @@ const userSchema = new mongoose.Schema({
       ref: "Notes",
     },
   ],
- 
+  noteToReviseToday: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Notes",
+    },
+  ],
+ dueforRevision: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Notes",
+    },
+  ],
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

@@ -15,49 +15,50 @@ module.exports = function (app) {
   });
 
   app.get("/home", [authJwt.verifyToken], async (req, res) => {
-    // try {
-    //   var x = 0;
-    //   var task = cron.schedule(" */5 * * * * *", async function () {
-    //     console.log("running a task every 5 sec 3 times" + new Date());
-    //     if (x < 4) {
-    //       const notes = await User.findOne({ _id: req.userId })
-    //         .select("-password")
-    //         .populate({
-    //           path: "note_created",
-    //           // select: "_id",
-    //           match: {
-    //             revision_date: {
-    //               $lte:
-    //                 new Date(new Date().toDateString()).getTime() + 86000000,
-    //               $gte: new Date(new Date().toDateString()),
-    //             },
-    //           },
-    //         });
-    //       // .exec({ $set: { noteToReviseToday: notes.note_created } });
-    //       notes.noteToReviseToday = notes.note_created;
-    //       await notes.save();
-    //       console.log(notes.note_created);
-    //       x++;
-    //       res.status(200).send(notes);
-    //     } else {
-    //       task.stop();
-    //       console.log("stopped");
-    //       task.stop();
-    //     }
-    //   });
-    //   if (x < 4) {
-    //     task.start();
-    //     function myFunction() {
-    //       setTimeout(function () {
-    //         console.log("Stopped");
-    //         task.stop();
-    //       }, 20000);
-    //     }
-    //     myFunction();
-    //   }
-    // } catch (err) {
-    //   res.status(500).send({ err: err });
-    // }
+    try {
+      //   var x = 0;
+      //   var task = cron.schedule(" */5 * * * * *", async function () {
+      //     console.log("running a task every 5 sec 3 times" + new Date());
+      //     if (x < 4) {
+      const notes = await User.findOne({ _id: req.userId })
+        .select("-password")
+        .populate({
+          path: "note_created",
+          // select: "_id",
+          match: {
+            revision_date: {
+              $lte: new Date(new Date().toDateString()).getTime() + 86000000,
+              $gte: new Date(new Date().toDateString()),
+            },
+          },
+        });
+      //       // .exec({ $set: { noteToReviseToday: notes.note_created } });
+      console.log("object");
+      console.log(notes);
+      notes.noteToReviseToday = notes.note_created;
+      await notes.save();
+      console.log(notes.note_created);
+      //       x++;
+      res.status(200).send(notes);
+      //     } else {
+      //       task.stop();
+      //       console.log("stopped");
+      //       task.stop();
+      //     }
+      //   });
+      //   if (x < 4) {
+      //     task.start();
+      //     function myFunction() {
+      //       setTimeout(function () {
+      //         console.log("Stopped");
+      //         task.stop();
+      //       }, 20000);
+      //     }
+      //     myFunction();
+      //   }
+    } catch (err) {
+      res.status(500).send({ err: err });
+    }
   });
   app.get("/today", [authJwt.verifyToken], async (req, res) => {
     try {
@@ -78,6 +79,7 @@ module.exports = function (app) {
           },
         });
       // .exec({ $set: { noteToReviseToday: notes.note_created } });
+      
       notes.noteToReviseToday = notes.note_created;
       await notes.save();
       const due = await Notes.find({
