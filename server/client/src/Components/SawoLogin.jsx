@@ -77,20 +77,22 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="containerStyle">
-      <section>
-        {!isUserLoggedIn ? (
-          <div
-            className="formContainer h-auto"
-            id="sawo-container"
-            style={{ height: "600px", width: "315px", borderRadius: "10px" }}
-          ></div>
-        ) : (
-          <div className="loggedin">
-            <h2>User Successfully Registerd</h2>
-          </div>
-        )}
-      </section>
+    <div className="bg-primary dark:bg-gray-600">
+      <div className="containerStyle ">
+        <section>
+          {!isUserLoggedIn ? (
+            <div
+              className="formContainer h-auto"
+              id="sawo-container"
+              style={{ height: "600px", width: "315px", borderRadius: "10px" }}
+            ></div>
+          ) : (
+            <div className="loggedin">
+              <h2>User Successfully Registerd</h2>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 };

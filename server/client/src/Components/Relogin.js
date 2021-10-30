@@ -10,14 +10,11 @@ const Relogin = () => {
     const user = JSON.parse(localStorage.getItem("verifiedUser"));
     if (user) {
       dispatch({ type: "USER", payload: user });
-      if (
-        history.location.pathname.startsWith("/login") ||
-        history.location.pathname.startsWith("/signup")
-      ) {
+      if (history.location.pathname.startsWith("/sawo")) {
         history.push("/");
       }
     } else {
-      history.push("/login");
+      history.push("/sawo");
     }
   }, []);
   return <div></div>;

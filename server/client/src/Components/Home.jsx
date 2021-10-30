@@ -5,6 +5,7 @@ const axios = require("axios");
 const Home = () => {
   console.log(JSON.parse(localStorage.getItem("verifiedUser")));
   const { state } = useContext(UserContext);
+  console.log(state);
   const UpdateTodayList = async () => {
     try {
       const response = await axios.get("/home", {

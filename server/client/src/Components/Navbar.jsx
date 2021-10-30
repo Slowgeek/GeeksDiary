@@ -62,7 +62,7 @@ export default function Navbar() {
           onClick={() => {
             localStorage.clear();
             dispatch({ type: "CLEAR" });
-            history.push("/login");
+            history.push("/sawo");
           }}
           href="#Motivates"
           className="mr-5 hover:text-white"
