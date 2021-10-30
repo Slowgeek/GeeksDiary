@@ -14,10 +14,10 @@ so this PWA assists in writing notes hassle free and Revise old concepts.
 ##  🔴 Live demo
 
 The site is deployed through Heroku, which you can view from [here](https://geeksdiary.herokuapp.com/)  
-<!-- 
+
 ## 📺 Demo video:
 
-Checkout the complete demo video from [here]() -->
+Checkout the complete demo video from [here](https://www.youtube.com/watch?v=rWE2AiIk7l8) 
 
 ## 🚀 Main Features
 - PasswordLess Authentication
