@@ -13,6 +13,7 @@ import Signup from "./Components/Signup";
 import { reducer, initialState } from "./reducers/useReducer";
 import TodayRevisionNotes from "./Components/TodayRevisionNotes";
 import SawoLogin from "./Components/SawoLogin";
+import Relogin from "./Components/Relogin";
 
 export const UserContext = createContext();
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        {/* <Relogin /> */}
+        <Relogin />
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/sawo" component={SawoLogin} />

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Toast from "./Toast/Toast";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 const axios = require("axios");
 const DisplayLearning = () => {
   const { noteId } = useParams();
@@ -163,6 +165,22 @@ const DisplayLearning = () => {
                   <div className="w-full mt-4">
                     <label
                       className="text-gray-700 dark:text-gray-200"
+                      htmlFor="code"
+                    >
+                      Code
+                    </label>{" "}
+                    <SyntaxHighlighter
+                      wrapLines={true}
+                      language="javascript"
+                      style={a11yDark}
+                      showLineNumbers
+                    >
+                      {note.code}
+                    </SyntaxHighlighter>
+                  </div>
+                  <div className="w-full mt-4">
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
                       htmlFor="due"
                     >
                       Tags
@@ -198,8 +216,6 @@ const DisplayLearning = () => {
                         day: "numeric",
                         month: "long",
                         weekday: "long",
-                        hour: "numeric",
-                        minute: "numeric",
                       }).format(new Date(note.revision_date))}
                     </div>
                   </div>{" "}

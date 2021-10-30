@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 import Toast from "../Components/Toast/Toast";
 import Navbar from "./Navbar";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -29,6 +30,7 @@ const Learning = () => {
   const [problem, setProblem] = useState("");
   const [notes, setNotes] = useState("");
   const [quickrev, setQuickrev] = useState("");
+  const [code, setCode] = useState("");
   const [tags, setTags] = useState([""]);
   const [revisionDate, setRevisionDate] = useState();
   console.log(problem);
@@ -42,6 +44,7 @@ const Learning = () => {
           problem,
           notes,
           quick_rev: quickrev,
+          code,
           tags,
           revision_date: revisionDate,
           noted_by: state.id,
@@ -153,6 +156,7 @@ const Learning = () => {
               />
             </div>
           </div>
+
           <div className="w-full mt-4">
             <label
               className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
@@ -167,6 +171,34 @@ const Learning = () => {
               onChange={(e) => setQuickrev(e.target.value)}
               className="block w-full h-40 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             ></textarea>
+          </div>
+          <div className="w-full mt-4">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+              htmlFor="code"
+            >
+              Code
+            </label>
+            <CodeEditor
+              value={code}
+              language="cpp"
+              placeholder="Enter the code if any"
+              onChange={(e) => setCode(e.target.value)}
+              padding={15}
+              style={{
+                fontSize: 12,
+                backgroundColor: "#cfcfcf",
+                fontFamily:
+                  "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+              }}
+            />
+            {/* <textarea
+              id="code"
+              placeholder="Enter the code if any"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="block w-full h-40 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            ></textarea> */}
           </div>
           <div>
             <label className="text-gray-700 dark:text-gray-200" htmlFor="tag">

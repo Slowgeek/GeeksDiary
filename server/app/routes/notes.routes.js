@@ -39,7 +39,7 @@ module.exports = function (app) {
   });
   app.get("/today", [authJwt.verifyToken], async (req, res) => {
     try {
-      console.log("here")
+      console.log("here");
       const notes = await User.findOne({ _id: req.userId }).populate({
         path: "note_created",
         // select: "_id",
@@ -84,17 +84,18 @@ module.exports = function (app) {
         problem,
         notes,
         quick_rev,
+        code,
         tags,
         revision_date,
         noted_by,
       } = req.body;
 
-      if (!problem || !quick_rev) {
+      if (!topic || !quick_rev) {
         console.log("object");
 
         return res
           .status(400)
-          .send({ error: "please enter problem and quickRevision" });
+          .send({ error: "please enterTopic and quickRevision" });
       }
       console.log("object");
       const note = new Notes({
@@ -103,6 +104,7 @@ module.exports = function (app) {
         problem,
         notes,
         quick_rev,
+        code,
         tags,
         revision_date,
         noted_by,
