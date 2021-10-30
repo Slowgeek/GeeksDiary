@@ -28,9 +28,7 @@ Checkout the complete demo video from [here]() -->
 - Show previous notes Due for Revision
 - works Offline 
 
-<!-- - Interactive 3D Models
-- Chatbot Assistant
- -->
+
 ## 💻 Tech Stack
 
 - React Js
@@ -74,5 +72,13 @@ In cmd Of client folder type  npm start.
 ```
 
 ## 🖼️ Some glimps of the site
+![Screenshot (190)](https://user-images.githubusercontent.com/64855593/139557789-9b782614-1820-4a5f-b873-e804c979da06.png)
+![Screenshot (191)](https://user-images.githubusercontent.com/64855593/139557820-ac0b0a4c-390d-42dd-bf01-a6c468775578.png)
+![screencapture-geeksdiary-herokuapp-todaynotes-2021-10-31-02_09_53](https://user-images.githubusercontent.com/64855593/139557840-35b33e32-8697-4d15-933a-2db8975eda5e.png)
+![screencapture-geeksdiary-herokuapp-mynotes-2021-10-31-02_09_29](https://user-images.githubusercontent.com/64855593/139557851-2a9cbbf2-d6ad-4822-be9c-570323b755bf.png)
+![screencapture-geeksdiary-herokuapp-learning-2021-10-31-02_07_59](https://user-images.githubusercontent.com/64855593/139557854-08c8b3dc-5315-498f-ae21-733e97abe9ed.png)
+![screencapture-geeksdiary-herokuapp-displaylearning-617da010bf51ddbe0e64f11a-2021-10-31-02_03_42](https://user-images.githubusercontent.com/64855593/139557857-2fffa90a-d017-4270-9432-35abd224beae.png)
+![Screenshot (203)](https://user-images.githubusercontent.com/64855593/139557871-755fd451-118f-4a44-900f-afaf113f560b.png)
+
 
 
