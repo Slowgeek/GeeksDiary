@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import Toast from "./Toast/Toast";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 const axios = require("axios");
 const DisplayLearning = () => {
   const { noteId } = useParams();
@@ -49,6 +52,8 @@ const DisplayLearning = () => {
       // history.push(`/displaylearning/${noteId}`);
       console.log(response);
       console.log(response.data);
+      Toast("Notes Revised", 1);
+      history.push("/mynotes");
     } catch (err) {
       console.log(err);
       console.log(err.response);
@@ -64,14 +69,14 @@ const DisplayLearning = () => {
         ? notes.map((note) => {
             return (
               <section className="mt-4 mx-4 max-w-4xl p-6 md:mx-auto  bg-secondary rounded-md shadow-md dark:bg-gray-800">
-                <div className="flex justify-between ">
-                  <div className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+                <div className="flex w-full justify-between  mt-6 ">
+                  <div className="text-lg font-semibold text-gray-700 capitalize dark:text-gray-200">
                     Revision
                   </div>
 
                   <Link
                     to={`/editlearning/${noteId}`}
-                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                   >
                     Edit 🕐
                   </Link>
@@ -84,7 +89,7 @@ const DisplayLearning = () => {
                 </p>
               </div>
             </div> */}
-                <form>
+                <form className="w-full">
                   <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                     <div>
                       <label
@@ -154,9 +159,25 @@ const DisplayLearning = () => {
                     </label>
                     <div
                       id="quick"
-                      className="whitespace-pre-wrap block h-auto px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md dark:bg-gray-800 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 "
+                      className="whitespace-pre-wrap block h-auto px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 "
                     >
                       {note.quick_rev}
+                    </div>
+                    <div className="w-full mt-4">
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="code"
+                      >
+                        Code
+                      </label>{" "}
+                      <SyntaxHighlighter
+                        wrapLines={true}
+                        language="javascript"
+                        style={a11yDark}
+                        showLineNumbers
+                      >
+                        {note.code}
+                      </SyntaxHighlighter>
                     </div>
                   </div>
                   <div className="w-full mt-4">
@@ -166,7 +187,7 @@ const DisplayLearning = () => {
                     >
                       Tags
                     </label>
-                    <div className="block h-auto px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md dark:bg-gray-800 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
+                    <div className="block h-auto px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md  rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
                       <ul className="flex flex-wrap mt-2">
                         {note.tags.map((tag, index) => (
                           <li
@@ -189,7 +210,7 @@ const DisplayLearning = () => {
                     </label>
                     <div
                       id="due"
-                      className="block h-10 px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md dark:bg-gray-800 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+                      className="block h-10 px-4 py-2 text-gray-700 bg-white  mx-auto  rounded-lg shadow-md rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
                     >
                       {" "}
                       {Intl.DateTimeFormat("en-US", {
@@ -197,8 +218,6 @@ const DisplayLearning = () => {
                         day: "numeric",
                         month: "long",
                         weekday: "long",
-                        hour: "numeric",
-                        minute: "numeric",
                       }).format(new Date(note.revision_date))}
                     </div>
                   </div>{" "}
@@ -208,7 +227,7 @@ const DisplayLearning = () => {
                         e.preventDefault();
                         Revised();
                       }}
-                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                     >
                       Revised 📝
                     </button>

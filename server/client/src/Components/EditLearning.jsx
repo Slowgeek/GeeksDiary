@@ -87,7 +87,7 @@ const EditLearning = () => {
             Learning
           </h2>
 
-          <form>
+          <form className="w-full">
             <div className="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
               <div>
                 <label
@@ -249,7 +249,7 @@ const EditLearning = () => {
                   e.preventDefault();
                   UpdateNote();
                 }}
-                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
               >
                 Update Note 🕐
               </button>

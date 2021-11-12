@@ -12,6 +12,7 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
+import { NetworkFirst } from "workbox-strategies";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 clientsClaim();
 
@@ -57,6 +58,23 @@ registerRoute(
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ],
+  })
+);
+
+//cache api result
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.origin === self.location.origin, // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new NetworkFirst({
+    cacheName: "notes-api-response",
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
       new ExpirationPlugin({ maxEntries: 50 }),
     ],
   })

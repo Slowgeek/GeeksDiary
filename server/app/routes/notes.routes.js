@@ -79,7 +79,7 @@ module.exports = function (app) {
           },
         });
       // .exec({ $set: { noteToReviseToday: notes.note_created } });
-      
+
       notes.noteToReviseToday = notes.note_created;
       await notes.save();
       const due = await Notes.find({
@@ -112,12 +112,13 @@ module.exports = function (app) {
         problem,
         notes,
         quick_rev,
+        code,
         tags,
         revision_date,
         noted_by,
       } = req.body;
 
-      if (!problem || !quick_rev) {
+      if (!topic || !quick_rev) {
         console.log("object");
 
         return res
@@ -131,6 +132,7 @@ module.exports = function (app) {
         problem,
         notes,
         quick_rev,
+        code,
         tags,
         revision_date,
         noted_by,
