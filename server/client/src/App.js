@@ -1,12 +1,17 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
 import { BrowserRouter, Route, useHistory, Switch } from "react-router-dom";
+import ProtectedRoute from "./Components/Protected/ProtectedRoutes";
 import Home from "./Components/Home";
 import Learning from "./Components/Learning";
+import EditLearning from "./Components/EditLearning";
 import DisplayLearning from "./Components/DisplayLearning";
 import MyNotes from "./Components/MyNotes";
+import { ToastContainer } from "react-toastify";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import Relogin from "./Components/Relogin";
 import { reducer, initialState } from "./reducers/useReducer";
+import TodayRevisionNotes from "./Components/TodayRevisionNotes";
 
 export const UserContext = createContext();
 
@@ -16,19 +21,31 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
+        <Relogin />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/learning" component={Learning} />
-          {/* <Route exact path="/editlearning" component={EditLearning} /> */}
-          <Route
+          <ProtectedRoute exact path="/learning" component={Learning} />
+          {/* <ProtectedRoute exact path="/editlearning" component={EditLearning} /> */}
+          <ProtectedRoute
+            exact
+            path="/editlearning/:noteId"
+            component={EditLearning}
+          />
+          <ProtectedRoute
             exact
             path="/displaylearning/:noteId"
             component={DisplayLearning}
           />
-          <Route exact path="/mynotes" component={MyNotes} />
+          <ProtectedRoute exact path="/mynotes" component={MyNotes} />
+          <ProtectedRoute
+            exact
+            path="/todaynotes"
+            component={TodayRevisionNotes}
+          />
         </Switch>{" "}
+        <ToastContainer />
       </BrowserRouter>{" "}
     </UserContext.Provider>
   );

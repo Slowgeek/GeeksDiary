@@ -4,6 +4,7 @@ const notesSchema = new mongoose.Schema(
   {
     topic: {
       type: String,
+      required: true,
     },
     level: {
       type: String,
@@ -12,7 +13,6 @@ const notesSchema = new mongoose.Schema(
     },
     problem: {
       type: String,
-      required: true,
     },
     notes: {
       type: String,
@@ -21,6 +21,9 @@ const notesSchema = new mongoose.Schema(
     quick_rev: {
       type: String,
       required: true,
+    },
+    code: {
+      type: String,
     },
     tags: {
       type: [String],

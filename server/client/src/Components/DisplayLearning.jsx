@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Navbar from "./Navbar";
+import Toast from "./Toast/Toast";
 const axios = require("axios");
 const DisplayLearning = () => {
   const { noteId } = useParams();
@@ -30,27 +34,52 @@ const DisplayLearning = () => {
       console.log(err.response);
     }
   };
-
+  const Revised = async () => {
+    try {
+      const response = await axios.patch(
+        "/revised",
+        {
+          noteId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": JSON.parse(localStorage.getItem("loggedUser"))
+              .accessToken,
+          },
+        }
+      );
+      // history.push(`/displaylearning/${noteId}`);
+      console.log(response);
+      console.log(response.data);
+      Toast("Notes Revised", 1);
+      history.push("/mynotes");
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+    }
+  };
   useEffect(() => {
     FetchNote();
   }, []);
   return (
-    <div className="bg-neutral-200 w-full ">
+    <div className="bg-neutral-200 w-full dark:bg-gray-600">
+      <Navbar />
       {notes
         ? notes.map((note) => {
             return (
               <section className="mt-4 mx-4 max-w-4xl p-6 md:mx-auto  bg-secondary rounded-md shadow-md dark:bg-gray-800">
                 <div className="flex justify-between ">
-                  <div className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+                  <div className="text-lg font-semibold text-gray-700 capitalize  dark:text-gray-100">
                     Revision
                   </div>
 
-                  {/* <Link
+                  <Link
                     to={`/editlearning/${noteId}`}
-                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                    className=" px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                   >
                     Edit 🕐
-                  </Link> */}
+                  </Link>
                 </div>
 
                 {/* <div class="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -72,7 +101,7 @@ const DisplayLearning = () => {
                       <div
                         id="topic"
                         type="text"
-                        className="whitespace-pre-wrap max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800"
+                        className="whitespace-pre-wrap max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-300"
                       >
                         {note.topic}
                       </div>
@@ -87,7 +116,7 @@ const DisplayLearning = () => {
                       <div
                         id="topic"
                         type="text"
-                        className="whitespace-pre-wrap max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800"
+                        className="whitespace-pre-wrap max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-300"
                       >
                         {note.level}{" "}
                       </div>
@@ -101,7 +130,7 @@ const DisplayLearning = () => {
                       </label>{" "}
                       <div
                         id="problem"
-                        className="whitespace-pre-wrap block  px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md dark:bg-gray-800 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 "
+                        className="whitespace-pre-wrap block  px-4 py-2 text-gray-700 bg-white   mx-auto  rounded-lg shadow-md  rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 "
                       >
                         {note.problem}
                       </div>
@@ -134,6 +163,22 @@ const DisplayLearning = () => {
                     >
                       {note.quick_rev}
                     </div>
+                  </div>{" "}
+                  <div className="w-full mt-4">
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
+                      htmlFor="code"
+                    >
+                      Code
+                    </label>{" "}
+                    <SyntaxHighlighter
+                      wrapLines={true}
+                      language="javascript"
+                      style={a11yDark}
+                      showLineNumbers
+                    >
+                      {note.code}
+                    </SyntaxHighlighter>
                   </div>
                   <div className="w-full mt-4">
                     <label
@@ -173,21 +218,19 @@ const DisplayLearning = () => {
                         day: "numeric",
                         month: "long",
                         weekday: "long",
-                        hour: "numeric",
-                        minute: "numeric",
                       }).format(new Date(note.revision_date))}
                     </div>
                   </div>{" "}
                   <div className="flex justify-end mt-6">
-                    {/* <button
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         Revised();
                       }}
-                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                      className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                     >
                       Revised 📝
-                    </button> */}
+                    </button>
                   </div>
                 </form>
               </section>
