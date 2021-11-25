@@ -33,7 +33,7 @@ const MyNotes = () => {
       <Navbar />
       {notes ? (
         notes.length === 0 ? (
-          <div>No class Created</div>
+          <div className="text-center text-gray-400">No Notes  Created</div>
         ) : (
           notes.map((note) => {
             return (
@@ -42,11 +42,10 @@ const MyNotes = () => {
                   <div className="flex items-center justify-between">
                     <span className="rounded text-sm font-light text-gray-600 dark:text-gray-400">
                       {Intl.DateTimeFormat("en-US", {
+                        day: "numeric",
                         year: "numeric",
                         month: "long",
                         weekday: "long",
-                        hour: "numeric",
-                        minute: "numeric",
                       }).format(new Date(note.revision_date))}
                     </span>
                     <h1 className=" px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">

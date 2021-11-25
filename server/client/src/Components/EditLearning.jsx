@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import CodeEditor from "@uiw/react-textarea-code-editor";
+import Toast from "../Components/Toast/Toast";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import es from "date-fns/locale/es";
@@ -68,8 +70,7 @@ const EditLearning = () => {
         }
       );
       history.push(`/displaylearning/${noteId}`);
-      console.log(response);
-      console.log(response.data);
+      Toast("Notes Updated", 1);
     } catch (err) {
       console.log(err);
       console.log(err.response);
@@ -83,7 +84,7 @@ const EditLearning = () => {
       <Navbar />
       {data ? (
         <section className="mt-4 mx-4 max-w-4xl p-6 md:mx-auto  bg-secondary rounded-md shadow-md dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+          <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-gray-100">
             Learning
           </h2>
 
@@ -206,6 +207,32 @@ const EditLearning = () => {
                 className="block w-full h-40 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               ></textarea>
             </div>
+            <div className="w-full mt-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                htmlFor="code"
+              >
+                Code
+              </label>
+              <CodeEditor
+                language="cpp"
+                placeholder="Enter the code if any"
+                value={data.code}
+                onChange={(e) =>
+                  setData((prevState) => ({
+                    ...prevState,
+                    code: e.target.value,
+                  }))
+                }
+                padding={15}
+                style={{
+                  fontSize: 12,
+                  backgroundColor: "#cfcfcf",
+                  fontFamily:
+                    "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                }}
+              />
+            </div>
             <div>
               <label className="text-gray-700 dark:text-gray-200" htmlFor="tag">
                 Tags
@@ -239,8 +266,6 @@ const EditLearning = () => {
                     revised: false,
                   }));
                 }}
-                showTimeSelect
-                dateFormat="Pp"
               />
             </div>
             <div className="flex justify-end mt-6">
@@ -249,7 +274,7 @@ const EditLearning = () => {
                   e.preventDefault();
                   UpdateNote();
                 }}
-                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                className="px-6 py-2 leading-5 bg-primary text-white transition-colors duration-200 transform  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
               >
                 Update Note 🕐
               </button>

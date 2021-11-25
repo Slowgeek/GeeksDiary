@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div>
       <div className="my-16 w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-        <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
+        <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-primary">
           Geek Diary 📗
         </h1>
 
