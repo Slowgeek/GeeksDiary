@@ -198,7 +198,7 @@ const Learning = () => {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               className="block w-full h-40 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            ></textarea> */}  
+            ></textarea> */}
           </div>
           <div className="pt-1">
             <label className="text-gray-700 dark:text-gray-200" htmlFor="tag">
@@ -220,6 +220,8 @@ const Learning = () => {
               id="due"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               selected={revisionDate}
+              minDate={new Date()}
+              placeholderText="After 7 days (Default)"
               onChange={(date) => setRevisionDate(date)}
             />
           </div>

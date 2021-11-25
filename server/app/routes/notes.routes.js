@@ -74,7 +74,7 @@ module.exports = function (app) {
           match: {
             revision_date: {
               $lte: new Date(new Date().toDateString()).getTime() + 86000000,
-              $gte: new Date(new Date().toDateString()),
+              $gte: new Date(new Date().toDateString()).getTime() - 19801000,
             },
           },
         });
