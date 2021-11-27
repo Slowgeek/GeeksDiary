@@ -37,7 +37,7 @@ const MyNotes = () => {
         ) : (
           notes.map((note) => {
             return (
-              <Link to={`/displaylearning/${note._id}`}>
+              <Link to={`/displaylearning/${note._id}`} key={note._id}>
                 <div className="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
                   <div className="flex items-center justify-between">
                     <span className="rounded text-sm font-light text-gray-600 dark:text-gray-400">

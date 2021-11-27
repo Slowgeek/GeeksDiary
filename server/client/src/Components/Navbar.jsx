@@ -41,7 +41,7 @@ export default function Navbar() {
             </svg>
           </button>
         </div>{" "}
-        <div className="mx-auto text-primary text-2xl ">Geek Diary 📗 </div>
+        <div className="mx-auto text-primary text-2xl ">Geeks Diary 📗 </div>
         <div className="text-left"></div>
       </div>
       <nav
